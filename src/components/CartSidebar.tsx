@@ -22,7 +22,6 @@ export const CartSidebar = ({ isOpen, onClose }: CartSidebarProps) => {
     try {
       console.log('Starting checkout process...')
 
-      // Snapshot del carrito antes de crear la orden (el hook limpia el carrito)
       try {
         sessionStorage.setItem('checkout_cart', JSON.stringify({ items: state.items, total: state.total }))
       } catch {}
@@ -35,7 +34,6 @@ export const CartSidebar = ({ isOpen, onClose }: CartSidebarProps) => {
       console.log('Order created:', order)
       console.log('About to save order to sessionStorage...')
       
-      // Guardar orden en sessionStorage para la página de checkout
       try {
         sessionStorage.setItem('checkout_order', JSON.stringify(order))
         sessionStorage.setItem('checkout_order_id', String(order.order_id))
@@ -51,7 +49,6 @@ export const CartSidebar = ({ isOpen, onClose }: CartSidebarProps) => {
       navigate('/checkout')
       console.log('Navigation call completed')
     } catch (error) {
-      // El error ya es manejado por el hook useCheckout
       console.error('Error in handleCreateCheckout:', error)
     }
   }
@@ -169,7 +166,7 @@ export const CartSidebar = ({ isOpen, onClose }: CartSidebarProps) => {
                 </div>
 
                 <Button 
-                  className="w-full mt-4" 
+                  className="w-full mt-4 y2k-gradient font-bold text-lg hover:scale-105 transition-transform duration-200" 
                   size="lg" 
                   onClick={handleCreateCheckout} 
                   disabled={isCreatingOrder}

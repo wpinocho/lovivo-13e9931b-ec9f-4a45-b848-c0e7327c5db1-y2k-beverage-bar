@@ -89,6 +89,9 @@ export default {
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out'
+			},
+			backgroundImage: {
+				'y2k-gradient': 'linear-gradient(135deg, hsl(181 68% 56%) 0%, hsl(180 65% 85%) 100%)',
 			}
 		}
 	},

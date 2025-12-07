@@ -26,7 +26,7 @@ export const ProductCardUI = ({ product }: ProductCardUIProps) => {
   return (
     <HeadlessProductCard product={product}>
       {(logic) => (
-        <Card className="bg-white border border-gray-200">
+        <Card className="glass-effect border-0 overflow-hidden h-full">
           <CardContent className="p-4">
             <Link to={`/products/${logic.product.slug}`} className="block">
               <div className="aspect-square bg-gray-100 rounded-md mb-3 overflow-hidden relative">
@@ -45,28 +45,28 @@ export const ProductCardUI = ({ product }: ProductCardUIProps) => {
                 {/* Badges */}
                 <div className="absolute top-2 left-2 flex flex-col gap-1">
                   {logic.discountPercentage && (
-                    <span className="bg-red-500 text-white text-xs px-2 py-1 rounded font-medium">
+                    <span className="bg-destructive text-destructive-foreground text-xs px-3 py-1 rounded-full font-bold">
                       -{logic.discountPercentage}%
                     </span>
                   )}
                   {logic.product.featured && (
-                    <span className="bg-orange-500 text-white text-xs px-2 py-1 rounded font-medium">
+                    <span className="y2k-gradient text-xs px-3 py-1 rounded-full font-bold">
                       Featured
                     </span>
                   )}
                   {!logic.inStock && (
-                    <span className="bg-gray-600 text-white text-xs px-2 py-1 rounded font-medium">
+                    <span className="bg-muted text-muted-foreground text-xs px-3 py-1 rounded-full font-bold">
                       Out of stock
                     </span>
                   )}
                 </div>
               </div>
 
-              <h3 className="text-black font-medium text-sm mb-1 line-clamp-2">
+              <h3 className="text-foreground font-bold text-sm mb-1 line-clamp-2">
                 {logic.product.title}
               </h3>
               {logic.product.description && (
-                <p className="text-gray-600 text-xs mb-3 line-clamp-2">
+                <p className="text-muted-foreground text-xs mb-3 line-clamp-2">
                   {logic.product.description.replace(/<[^>]*>/g, '')}
                 </p>
               )}
@@ -76,7 +76,7 @@ export const ProductCardUI = ({ product }: ProductCardUIProps) => {
               <div className="mb-3 space-y-2">
                 {logic.options.map((opt) => (
                   <div key={opt.id}>
-                    <div className="text-xs font-medium text-black mb-1">{opt.name}</div>
+                    <div className="text-xs font-bold text-foreground mb-1">{opt.name}</div>
                     <div className="flex flex-wrap gap-2">
                       {opt.values.filter(val => logic.isOptionValueAvailable(opt.name, val)).map((val) => {
                         const isSelected = logic.selected[opt.name] === val
@@ -106,12 +106,12 @@ export const ProductCardUI = ({ product }: ProductCardUIProps) => {
                             key={val}
                             type="button"
                             onClick={() => logic.handleOptionChange(opt.name, val)}
-                            className={`border rounded px-2 py-1 text-xs font-medium ${
+                            className={`border rounded-lg px-3 py-1 text-xs font-bold transition-all duration-200 ${
                               isSelected 
-                                ? 'border-black bg-black text-white' 
+                                ? 'y2k-gradient y2k-border' 
                                 : logic.selected[opt.name] && !isSelected
-                                  ? 'border-gray-300 bg-white text-gray-700 opacity-40'
-                                  : 'border-gray-300 bg-white text-gray-700'
+                                  ? 'border-border bg-muted text-muted-foreground opacity-40'
+                                  : 'border-border bg-card text-foreground hover:border-primary'
                             }`}
                             aria-pressed={isSelected}
                             aria-label={`${opt.name}: ${val}`}
@@ -129,24 +129,23 @@ export const ProductCardUI = ({ product }: ProductCardUIProps) => {
 
             <div className="flex items-center justify-between">
               <div className="flex flex-col">
-                <span className="text-black font-semibold">
+                <span className="y2k-text-gradient font-black text-lg">
                   {logic.formatMoney(logic.currentPrice)}
                 </span>
                 {logic.currentCompareAt && logic.currentCompareAt > logic.currentPrice && (
-                  <span className="text-gray-400 text-xs line-through">
+                  <span className="text-muted-foreground text-xs line-through">
                     {logic.formatMoney(logic.currentCompareAt)}
                   </span>
                 )}
               </div>
               <Button
-                variant="outline"
                 size="sm"
                 onClick={() => {
-                  logic.onAddToCartSuccess() // Hook para features adicionales
+                  logic.onAddToCartSuccess()
                   logic.handleAddToCart()
                 }}
                 disabled={!logic.canAddToCart}
-                className="text-black border-black hover:bg-black hover:text-white disabled:opacity-50"
+                className="y2k-gradient font-bold hover:scale-105 transition-transform duration-200 disabled:opacity-50"
               >
                 {logic.inStock ? 'Add' : 'Out of stock'}
               </Button>

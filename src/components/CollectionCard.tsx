@@ -9,7 +9,7 @@ interface CollectionCardProps {
 
 export const CollectionCard = ({ collection, onViewProducts }: CollectionCardProps) => {
   return (
-    <Card className="bg-white border border-gray-200 overflow-hidden">
+    <Card className="glass-effect border-0 overflow-hidden h-full">
       <CardContent className="p-0">
         <div className="aspect-[4/3] bg-gray-100 overflow-hidden">
           {collection.image ? (
@@ -25,30 +25,29 @@ export const CollectionCard = ({ collection, onViewProducts }: CollectionCardPro
           )}
         </div>
         
-        <div className="p-4">
-          <div className="flex items-start justify-between mb-2">
-            <h3 className="text-black font-semibold text-lg line-clamp-1">
+        <div className="p-5">
+          <div className="flex items-start justify-between mb-3">
+            <h3 className="text-foreground font-black text-xl line-clamp-1">
               {collection.name}
             </h3>
             {collection.featured && (
-              <span className="bg-orange-500 text-white text-xs px-2 py-1 rounded font-medium">
+              <span className="y2k-gradient text-xs px-3 py-1 rounded-full font-bold">
                 Featured
               </span>
             )}
           </div>
           
           {collection.description && (
-            <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+            <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
               {collection.description}
             </p>
           )}
           
           <Button 
-            variant="outline" 
-            className="w-full text-black border-gray-300 hover:bg-gray-50"
+            className="w-full y2k-gradient font-bold hover:scale-105 transition-transform duration-200"
             onClick={() => onViewProducts(collection.id)}
           >
-            View Products
+            Explore Collection
           </Button>
         </div>
       </CardContent>
