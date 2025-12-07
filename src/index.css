@@ -143,4 +143,8 @@ All colors MUST be HSL.
     backdrop-filter: blur(12px);
     border: 1px solid rgba(70, 214, 217, 0.2);
   }
+  
+  .y2k-border-bottom {
+    border-bottom: 1px solid rgba(70, 214, 217, 0.3);
+  }
 }
